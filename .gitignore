@@ -1,0 +1,12 @@
+.env
+data/
+artifacts/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+AGENTS.md
+CONTEXT.md
+HANDOFF.md
+IMPLEMENTATION_GUIDE.md
