@@ -1,0 +1,75 @@
+seed: 42
+period_days: 28
+min_period_posts: 25
+min_distinct_users: 5
+er_winsor_pct: 0.99
+min_followers: 5000
+weights_trend: null
+theta: null
+weights_hashtag: null
+n_hashtags: null
+n_topics: null
+candidate_pool_size: null
+centroid_sample: null
+hashtag_caption_sample: null
+growth_smoothing: null
+tau: null
+min_account_posts: null
+min_type_posts: null
+time_half_life_days: null
+shrinkage_k: null
+train_rows: null
+time_cutoffs:
+- '2019-01-03'
+- '2019-02-26'
+backtest_origins:
+- '2019-04-17'
+- '2019-03-20'
+- '2019-02-20'
+- '2019-01-23'
+- '2018-12-26'
+backtest_tune_fraction: null
+feature_allowlist:
+  cold:
+  - log_followers
+  - hour_of_day
+  - day_of_week
+  - is_weekend
+  - hashtag_count
+  - caption_length
+  - usertag_count
+  - n_media
+  - category_beauty
+  - category_family
+  - category_fashion
+  - category_fitness
+  - category_food
+  - category_interior
+  - category_other
+  - category_pet
+  - category_travel
+  - media_type_carousel
+  - media_type_image
+  full:
+  - log_followers
+  - hour_of_day
+  - day_of_week
+  - is_weekend
+  - hashtag_count
+  - caption_length
+  - usertag_count
+  - n_media
+  - category_beauty
+  - category_family
+  - category_fashion
+  - category_fitness
+  - category_food
+  - category_interior
+  - category_other
+  - category_pet
+  - category_travel
+  - media_type_carousel
+  - media_type_image
+  - historical_avg_engagement
+  - days_since_last_post
+  - posts_last_30d
