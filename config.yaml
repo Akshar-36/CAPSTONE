@@ -54,11 +54,11 @@ feature_allowlist:
   - posts_last_30d
 growth_smoothing: 0.001
 hashtag_caption_sample: 20
-min_account_posts: null
+min_account_posts: 10
 min_distinct_users: 5
 min_followers: 5000
 min_period_posts: 25
-min_type_posts: null
+min_type_posts: 100
 n_hashtags: 8
 n_topics: null
 period_days: 28
