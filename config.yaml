@@ -63,13 +63,13 @@ n_hashtags: 8
 n_topics: null
 period_days: 28
 seed: 42
-shrinkage_k: null
+shrinkage_k: 10
 tau: 0.3430810272693634
 theta: 0.10311637809762543
 time_cutoffs:
 - '2019-01-03'
 - '2019-02-26'
-time_half_life_days: null
+time_half_life_days: 14
 train_rows: null
 weights_hashtag: null
 weights_trend:
