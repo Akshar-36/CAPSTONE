@@ -5,7 +5,7 @@ backtest_origins:
 - '2019-01-23'
 - '2018-12-26'
 backtest_tune_fraction: 0.6
-candidate_pool_size: null
+candidate_pool_size: 50
 centroid_sample: 500
 er_winsor_pct: 0.99
 feature_allowlist:
@@ -59,7 +59,7 @@ min_distinct_users: 5
 min_followers: 5000
 min_period_posts: 25
 min_type_posts: null
-n_hashtags: null
+n_hashtags: 8
 n_topics: null
 period_days: 28
 seed: 42
