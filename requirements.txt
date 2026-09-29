@@ -16,3 +16,4 @@ plotly
 jupyter
 pytest
 tqdm
+pytz
