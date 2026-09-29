@@ -4,7 +4,7 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from trend import calculate_trend_signals
 
-def get_candidates_for_brand(brand_text, origin_date, posts, hashtags, h_emb_df, category_centroids, model, config):
+def get_candidates_for_brand(brand_text, trends_df, h_emb_df, category_centroids, model, config):
     brand_emb = model.encode([brand_text])[0]
     
     # Map to category
@@ -19,13 +19,13 @@ def get_candidates_for_brand(brand_text, origin_date, posts, hashtags, h_emb_df,
     if best_sim < config['tau']:
         best_cat = 'all'
         
-    trend_df = calculate_trend_signals(posts, hashtags, origin_date, config, best_cat)
-    if trend_df.empty:
+    pool_trends = trends_df[trends_df['pool'] == best_cat]
+    if pool_trends.empty:
         return pd.DataFrame(), best_cat
         
-    eligible_hashtags = trend_df['hashtag'].tolist()
+    eligible_hashtags = pool_trends['hashtag'].tolist()
     
-    pool_emb_df = h_emb_df[h_emb_df.index.isin(eligible_hashtags)]
+    pool_emb_df = h_emb_df[h_emb_df['hashtag'].isin(eligible_hashtags)]
     
     if pool_emb_df.empty:
         return pd.DataFrame(), best_cat
@@ -38,25 +38,13 @@ def get_candidates_for_brand(brand_text, origin_date, posts, hashtags, h_emb_df,
     pool_emb_df = pool_emb_df.reset_index()
     
     candidates = pool_emb_df.sort_values('relevance', ascending=False).head(config['candidate_pool_size'])
-    candidates = candidates.merge(trend_df[['hashtag', 'trend_score', 'trend_direction']], on='hashtag', how='inner')
+    candidates = candidates.merge(pool_trends[['hashtag', 'trend_score', 'trend_direction']], on='hashtag', how='inner')
     
     return candidates, best_cat
 
-def calculate_historical_engagement(pool, candidate_hashtags, origin_date, posts, hashtags, config):
-    cutoff_date = origin_date - pd.Timedelta(days=config['period_days'])
-    
-    if pool == 'all':
-        pool_posts = posts[posts['has_followers'] == True]
-    else:
-        pool_posts = posts[(posts['category'] == pool) & (posts['has_followers'] == True)]
-        
-    hist_posts = pool_posts[pool_posts['posted_at'] <= cutoff_date]
-    hist_tags = hist_posts[['post_id', 'engagement_rate']].merge(hashtags, on='post_id', how='inner')
-    hist_tags = hist_tags[hist_tags['hashtag'].isin(candidate_hashtags)]
-    
-    hist_eng = hist_tags.groupby('hashtag')['engagement_rate'].mean().reset_index()
-    hist_eng.rename(columns={'engagement_rate': 'historical_engagement'}, inplace=True)
-    
+def calculate_historical_engagement(pool, candidate_hashtags, history_df):
+    pool_history = history_df[history_df['pool'] == pool]
+    hist_eng = pool_history[pool_history['hashtag'].isin(candidate_hashtags)][['hashtag', 'historical_engagement']]
     return hist_eng
 
 def rank_hashtags(candidates, config):

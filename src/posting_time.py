@@ -2,15 +2,11 @@ import pandas as pd
 import pytz
 from datetime import datetime, timedelta
 
-def get_recommended_posting_time(pool: str, artifact_path: str = 'artifacts/v1.0/posting_time.parquet', tz_str: str = "UTC") -> dict:
+def get_recommended_posting_time(pool: str, artifact_df: pd.DataFrame, tz_str: str = "UTC") -> dict:
     """
     Returns the recommended 1-hour posting window for a given category pool.
     Matches the Phase 5e contract schema.
     """
-    try:
-        artifact_df = pd.read_parquet(artifact_path)
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Posting time artifact not found at {artifact_path}")
         
     pool_name = pool if pool in artifact_df['pool'].values else 'all'
     pool_data = artifact_df[artifact_df['pool'] == pool_name]
