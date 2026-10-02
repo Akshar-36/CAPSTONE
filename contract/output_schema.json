@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Recommendation Output Schema",
+  "type": "object",
+  "properties": {
+    "recommended_topic": { "type": "string" },
+    "trending_topics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommended_hashtags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^#" }
+    },
+    "hashtag_details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "hashtag": { "type": "string", "pattern": "^#" },
+          "relevance": { "type": "number", "minimum": -1.0, "maximum": 1.0 },
+          "trend_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+          "trend_direction": { "type": "string", "enum": ["rising", "stable", "falling"] },
+          "historical_engagement": { "type": "number", "minimum": 0.0 },
+          "score": { "type": "number", "minimum": 0.0, "maximum": 1.0 }
+        },
+        "required": [
+          "hashtag",
+          "relevance",
+          "trend_score",
+          "trend_direction",
+          "historical_engagement",
+          "score"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "recommended_content_type": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "string", "enum": ["image", "carousel"] },
+        "median_relative_engagement_by_type": {
+          "type": "object",
+          "properties": {
+            "image": { "type": "number", "minimum": 0.0 },
+            "carousel": { "type": "number", "minimum": 0.0 }
+          },
+          "required": ["image", "carousel"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["value", "median_relative_engagement_by_type"],
+      "additionalProperties": false
+    },
+    "predicted_engagement": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "number", "minimum": 0.0 },
+        "unit": { "type": "string", "const": "engagement_rate" },
+        "label": { "type": "string", "enum": ["Low", "Medium", "High"] }
+      },
+      "required": ["value", "unit", "label"],
+      "additionalProperties": false
+    },
+    "recommended_posting_time": {
+      "type": "object",
+      "properties": {
+        "day": { "type": "string" },
+        "start": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" },
+        "end": { "type": "string", "pattern": "^\\d{2}:\\d{2}$" },
+        "timezone": { "type": "string" }
+      },
+      "required": ["day", "start", "end", "timezone"],
+      "additionalProperties": false
+    },
+    "data_basis": {
+      "type": "object",
+      "properties": {
+        "dataset": { "type": "string" },
+        "data_period": { "type": "string" },
+        "reference_date": { "type": "string" },
+        "data_type": { "type": "string", "const": "historical" },
+        "category": { "type": "string" },
+        "category_match": { "type": "string", "enum": ["matched", "fallback_all"] }
+      },
+      "required": [
+        "dataset",
+        "data_period",
+        "reference_date",
+        "data_type",
+        "category",
+        "category_match"
+      ],
+      "additionalProperties": false
+    },
+    "model_version": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" }
+  },
+  "required": [
+    "recommended_topic",
+    "trending_topics",
+    "recommended_hashtags",
+    "hashtag_details",
+    "recommended_content_type",
+    "predicted_engagement",
+    "recommended_posting_time",
+    "data_basis",
+    "model_version",
+    "generated_at"
+  ],
+  "additionalProperties": false
+}

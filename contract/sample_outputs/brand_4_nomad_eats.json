@@ -1,0 +1,112 @@
+{
+  "recommended_topic": "foodnetwork",
+  "trending_topics": [
+    "plantpower",
+    "foodnetwork",
+    "onmytable"
+  ],
+  "recommended_hashtags": [
+    "#foodnetwork",
+    "#eatfamous",
+    "#zagat",
+    "#foodgasm",
+    "#plantpower",
+    "#eathealthy",
+    "#foodbeast",
+    "#onmytable"
+  ],
+  "hashtag_details": [
+    {
+      "hashtag": "#foodnetwork",
+      "relevance": 0.4451580047607422,
+      "trend_score": 0.9596412556053812,
+      "trend_direction": "rising",
+      "historical_engagement": 0.03834181462851108,
+      "score": 0.6550288900906365
+    },
+    {
+      "hashtag": "#eatfamous",
+      "relevance": 0.4596315026283264,
+      "trend_score": 0.8071748878923767,
+      "trend_direction": "falling",
+      "historical_engagement": 0.03642463576113242,
+      "score": 0.6167293088591386
+    },
+    {
+      "hashtag": "#zagat",
+      "relevance": 0.5551263689994812,
+      "trend_score": 0.13901345291479822,
+      "trend_direction": "falling",
+      "historical_engagement": 0.039546185225557064,
+      "score": 0.6023691587259925
+    },
+    {
+      "hashtag": "#foodgasm",
+      "relevance": 0.41679298877716064,
+      "trend_score": 0.8968609865470852,
+      "trend_direction": "stable",
+      "historical_engagement": 0.03945549265063424,
+      "score": 0.5862563865991625
+    },
+    {
+      "hashtag": "#plantpower",
+      "relevance": 0.3971831798553467,
+      "trend_score": 0.9618834080717489,
+      "trend_direction": "falling",
+      "historical_engagement": 0.041411258937534445,
+      "score": 0.5849137937391825
+    },
+    {
+      "hashtag": "#eathealthy",
+      "relevance": 0.40357673168182373,
+      "trend_score": 0.7399103139013453,
+      "trend_direction": "rising",
+      "historical_engagement": 0.047894723576710076,
+      "score": 0.5726214325182021
+    },
+    {
+      "hashtag": "#foodbeast",
+      "relevance": 0.4443999230861664,
+      "trend_score": 0.7869955156950673,
+      "trend_direction": "stable",
+      "historical_engagement": 0.03521487533447249,
+      "score": 0.5702790422128386
+    },
+    {
+      "hashtag": "#onmytable",
+      "relevance": 0.40296974778175354,
+      "trend_score": 0.9394618834080718,
+      "trend_direction": "stable",
+      "historical_engagement": 0.03734877087978774,
+      "score": 0.5569655201016126
+    }
+  ],
+  "recommended_content_type": {
+    "value": "carousel",
+    "median_relative_engagement_by_type": {
+      "image": 1.0,
+      "carousel": 1.0042157552786586
+    }
+  },
+  "predicted_engagement": {
+    "value": 0.02679049217872206,
+    "unit": "engagement_rate",
+    "label": "Medium"
+  },
+  "recommended_posting_time": {
+    "day": "Friday",
+    "start": "21:00",
+    "end": "22:00",
+    "timezone": "UTC"
+  },
+  "data_basis": {
+    "dataset": "Kim et al., WWW '20",
+    "data_period": "2012-02-12 to 2019-05-15",
+    "reference_date": "2019-05-15",
+    "data_type": "historical",
+    "category": "food",
+    "category_match": "matched"
+  },
+  "model_version": "v1.0",
+  "generated_at": "2026-09-27T12:11:09.546983+00:00"
+}

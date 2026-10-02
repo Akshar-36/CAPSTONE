@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Brand Input Schema",
+  "type": "object",
+  "properties": {
+    "brand_name": { "type": "string" },
+    "business_description": { "type": "string" },
+    "industry": { "type": "string" },
+    "target_audience": { "type": "string" },
+    "brand_tone": { "type": "string" },
+    "follower_count": { "type": "integer", "minimum": 0 },
+    "timezone": { "type": "string" },
+    "optional_preferences": {}
+  },
+  "required": [
+    "brand_name",
+    "business_description",
+    "industry",
+    "target_audience"
+  ],
+  "additionalProperties": false
+}
