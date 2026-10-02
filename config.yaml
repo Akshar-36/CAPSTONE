@@ -60,7 +60,7 @@ min_followers: 5000
 min_period_posts: 25
 min_type_posts: 100
 n_hashtags: 8
-n_topics: 3
+n_topics: null
 period_days: 28
 seed: 42
 shrinkage_k: 10
@@ -70,11 +70,8 @@ time_cutoffs:
 - '2019-01-03'
 - '2019-02-26'
 time_half_life_days: 14
-train_rows: 400000
-weights_hashtag:
-- 0.333
-- 0.333
-- 0.334
+train_rows: null
+weights_hashtag: null
 weights_trend:
 - 0.0
 - 0.0
