@@ -1,0 +1,112 @@
+{
+  "recommended_topic": "travelingwithkids",
+  "trending_topics": [
+    "allaboutadventures",
+    "beautifulplaces",
+    "travelawesome"
+  ],
+  "recommended_hashtags": [
+    "#travelingwithkids",
+    "#stayandwander",
+    "#voyaged",
+    "#allaboutadventures",
+    "#beautifulplaces",
+    "#familytravelblogger",
+    "#travelawesome",
+    "#explorer"
+  ],
+  "hashtag_details": [
+    {
+      "hashtag": "#travelingwithkids",
+      "relevance": 0.45561113953590393,
+      "trend_score": 0.8,
+      "trend_direction": "rising",
+      "historical_engagement": 0.0484502632269438,
+      "score": 0.6269193824947209
+    },
+    {
+      "hashtag": "#stayandwander",
+      "relevance": 0.3887432813644409,
+      "trend_score": 0.760352422907489,
+      "trend_direction": "falling",
+      "historical_engagement": 0.07290195830497376,
+      "score": 0.5811464326463697
+    },
+    {
+      "hashtag": "#voyaged",
+      "relevance": 0.3665664792060852,
+      "trend_score": 0.41791483113069017,
+      "trend_direction": "falling",
+      "historical_engagement": 0.10930092321190754,
+      "score": 0.5789273856415634
+    },
+    {
+      "hashtag": "#allaboutadventures",
+      "relevance": 0.334968626499176,
+      "trend_score": 0.9903083700440528,
+      "trend_direction": "stable",
+      "historical_engagement": 0.07698990985931803,
+      "score": 0.5643414224465004
+    },
+    {
+      "hashtag": "#beautifulplaces",
+      "relevance": 0.3762172758579254,
+      "trend_score": 0.9797356828193833,
+      "trend_direction": "stable",
+      "historical_engagement": 0.05572295503272256,
+      "score": 0.5536824429584335
+    },
+    {
+      "hashtag": "#familytravelblogger",
+      "relevance": 0.43319761753082275,
+      "trend_score": 0.7773861967694566,
+      "trend_direction": "stable",
+      "historical_engagement": 0.04205932065258816,
+      "score": 0.5445298978029826
+    },
+    {
+      "hashtag": "#travelawesome",
+      "relevance": 0.373764306306839,
+      "trend_score": 0.9186490455212922,
+      "trend_direction": "falling",
+      "historical_engagement": 0.0572975128119734,
+      "score": 0.5348751622357112
+    },
+    {
+      "hashtag": "#explorer",
+      "relevance": 0.3953821063041687,
+      "trend_score": 0.8135095447870778,
+      "trend_direction": "falling",
+      "historical_engagement": 0.04749022044134804,
+      "score": 0.5015868657996748
+    }
+  ],
+  "recommended_content_type": {
+    "value": "carousel",
+    "median_relative_engagement_by_type": {
+      "image": 1.0,
+      "carousel": 1.025531914893617
+    }
+  },
+  "predicted_engagement": {
+    "value": 0.018682305701958567,
+    "unit": "engagement_rate",
+    "label": "Low"
+  },
+  "recommended_posting_time": {
+    "day": "Thursday",
+    "start": "06:00",
+    "end": "07:00",
+    "timezone": "UTC"
+  },
+  "data_basis": {
+    "dataset": "Kim et al., WWW '20",
+    "data_period": "2012-02-12 to 2019-05-15",
+    "reference_date": "2019-05-15",
+    "data_type": "historical",
+    "category": "all",
+    "category_match": "fallback_all"
+  },
+  "model_version": "v1.0",
+  "generated_at": "2026-09-27T12:11:09.809579+00:00"
+}

@@ -1,0 +1,112 @@
+{
+  "recommended_topic": "makeupartistsworldwide",
+  "trending_topics": [
+    "toofaced",
+    "sephora",
+    "instabeauty"
+  ],
+  "recommended_hashtags": [
+    "#makeupartistsworldwide",
+    "#undiscoveredmuas",
+    "#colourpopme",
+    "#abhprsearch",
+    "#instabeauty",
+    "#sephora",
+    "#cutcrease",
+    "#toofaced"
+  ],
+  "hashtag_details": [
+    {
+      "hashtag": "#makeupartistsworldwide",
+      "relevance": 0.5147168040275574,
+      "trend_score": 0.5862068965517241,
+      "trend_direction": "falling",
+      "historical_engagement": 0.07006818349384798,
+      "score": 0.6931755545146385
+    },
+    {
+      "hashtag": "#undiscoveredmuas",
+      "relevance": 0.3618875741958618,
+      "trend_score": 0.5287356321839081,
+      "trend_direction": "falling",
+      "historical_engagement": 0.11039306533768502,
+      "score": 0.6448047241743873
+    },
+    {
+      "hashtag": "#colourpopme",
+      "relevance": 0.3704177737236023,
+      "trend_score": 0.9080459770114943,
+      "trend_direction": "rising",
+      "historical_engagement": 0.07697381173539096,
+      "score": 0.6445212618708335
+    },
+    {
+      "hashtag": "#abhprsearch",
+      "relevance": 0.35422343015670776,
+      "trend_score": 0.632183908045977,
+      "trend_direction": "rising",
+      "historical_engagement": 0.09917685730189744,
+      "score": 0.6229063413103658
+    },
+    {
+      "hashtag": "#instabeauty",
+      "relevance": 0.3973850607872009,
+      "trend_score": 0.9425287356321839,
+      "trend_direction": "rising",
+      "historical_engagement": 0.053749774502655646,
+      "score": 0.59356030463985
+    },
+    {
+      "hashtag": "#sephora",
+      "relevance": 0.412354439496994,
+      "trend_score": 0.9540229885057471,
+      "trend_direction": "rising",
+      "historical_engagement": 0.04515192530283448,
+      "score": 0.5807357257811062
+    },
+    {
+      "hashtag": "#cutcrease",
+      "relevance": 0.3449726700782776,
+      "trend_score": 0.47126436781609193,
+      "trend_direction": "falling",
+      "historical_engagement": 0.1012696781188409,
+      "score": 0.5648523270385107
+    },
+    {
+      "hashtag": "#toofaced",
+      "relevance": 0.37842246890068054,
+      "trend_score": 0.9885057471264368,
+      "trend_direction": "rising",
+      "historical_engagement": 0.04881993007701,
+      "score": 0.5638557304856202
+    }
+  ],
+  "recommended_content_type": {
+    "value": "carousel",
+    "median_relative_engagement_by_type": {
+      "image": 1.0,
+      "carousel": 1.0355940662646077
+    }
+  },
+  "predicted_engagement": {
+    "value": 0.026662867977067416,
+    "unit": "engagement_rate",
+    "label": "Medium"
+  },
+  "recommended_posting_time": {
+    "day": "Saturday",
+    "start": "10:00",
+    "end": "11:00",
+    "timezone": "America/New_York"
+  },
+  "data_basis": {
+    "dataset": "Kim et al., WWW '20",
+    "data_period": "2012-02-12 to 2019-05-15",
+    "reference_date": "2019-05-15",
+    "data_type": "historical",
+    "category": "beauty",
+    "category_match": "matched"
+  },
+  "model_version": "v1.0",
+  "generated_at": "2026-09-27T12:11:09.135890+00:00"
+}

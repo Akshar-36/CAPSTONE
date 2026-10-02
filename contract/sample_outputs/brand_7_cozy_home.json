@@ -1,0 +1,112 @@
+{
+  "recommended_topic": "howwedwell",
+  "trending_topics": [
+    "howwedwell",
+    "howihome",
+    "smmakelifebeautiful"
+  ],
+  "recommended_hashtags": [
+    "#howwedwell",
+    "#designsponge",
+    "#cottagestyle",
+    "#interior123",
+    "#colourmyhome",
+    "#smmakelifebeautiful",
+    "#howihome",
+    "#interieur"
+  ],
+  "hashtag_details": [
+    {
+      "hashtag": "#howwedwell",
+      "relevance": 0.5699171423912048,
+      "trend_score": 0.9822485207100592,
+      "trend_direction": "falling",
+      "historical_engagement": 0.04533216115648192,
+      "score": 0.8825585402384482
+    },
+    {
+      "hashtag": "#designsponge",
+      "relevance": 0.4793339967727661,
+      "trend_score": 0.8520710059171598,
+      "trend_direction": "falling",
+      "historical_engagement": 0.0453644322696267,
+      "score": 0.674639912823501
+    },
+    {
+      "hashtag": "#cottagestyle",
+      "relevance": 0.565259575843811,
+      "trend_score": 0.6449704142011834,
+      "trend_direction": "stable",
+      "historical_engagement": 0.0363084669727242,
+      "score": 0.6376273732924834
+    },
+    {
+      "hashtag": "#interior123",
+      "relevance": 0.5418214201927185,
+      "trend_score": 0.7218934911242604,
+      "trend_direction": "falling",
+      "historical_engagement": 0.036585622853461224,
+      "score": 0.6247604595235774
+    },
+    {
+      "hashtag": "#colourmyhome",
+      "relevance": 0.43193507194519043,
+      "trend_score": 0.6272189349112426,
+      "trend_direction": "falling",
+      "historical_engagement": 0.05352152921090684,
+      "score": 0.6238161540263427
+    },
+    {
+      "hashtag": "#smmakelifebeautiful",
+      "relevance": 0.4821198284626007,
+      "trend_score": 0.8579881656804734,
+      "trend_direction": "rising",
+      "historical_engagement": 0.04078330881846909,
+      "score": 0.6193424240351613
+    },
+    {
+      "hashtag": "#howihome",
+      "relevance": 0.40091612935066223,
+      "trend_score": 0.9112426035502958,
+      "trend_direction": "stable",
+      "historical_engagement": 0.04793954093680007,
+      "score": 0.5872292420260385
+    },
+    {
+      "hashtag": "#interieur",
+      "relevance": 0.46436187624931335,
+      "trend_score": 0.6863905325443787,
+      "trend_direction": "rising",
+      "historical_engagement": 0.04492836852860254,
+      "score": 0.585684827271792
+    }
+  ],
+  "recommended_content_type": {
+    "value": "carousel",
+    "median_relative_engagement_by_type": {
+      "image": 1.0,
+      "carousel": 1.0
+    }
+  },
+  "predicted_engagement": {
+    "value": 0.020376908570248705,
+    "unit": "engagement_rate",
+    "label": "Medium"
+  },
+  "recommended_posting_time": {
+    "day": "Thursday",
+    "start": "04:00",
+    "end": "05:00",
+    "timezone": "UTC"
+  },
+  "data_basis": {
+    "dataset": "Kim et al., WWW '20",
+    "data_period": "2012-02-12 to 2019-05-15",
+    "reference_date": "2019-05-15",
+    "data_type": "historical",
+    "category": "interior",
+    "category_match": "matched"
+  },
+  "model_version": "v1.0",
+  "generated_at": "2026-09-27T12:11:09.911414+00:00"
+}
