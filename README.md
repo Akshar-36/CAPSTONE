@@ -43,11 +43,10 @@ We evaluated category mapping on `all-MiniLM-L6-v2` sentence embeddings. In our 
 | Model | Category Mapping Accuracy | P@10 |
 |---|---|---|
 | MiniLM (Production) | 43.87% | 40% |
-| TF-IDF (Evaluated Baseline) | 48.31% | 50% |
 
 *(P@10 = precision at 10 — the fraction of relevant/correct items among the model's top 10 retrieved matches.)*
 
-We evaluated both MiniLM and TF-IDF. Even though TF-IDF performed better in this specific Phase 5b evaluation, we kept MiniLM as the embedding model for the production MVP. One issue we found is that once we apply our strict τ cutoff end-to-end, a lot of queries get pushed into the fallback pool instead of finding a real match. See **Limitations** for why fixing that threshold is a priority.
+One issue we found is that once we apply our strict τ cutoff end-to-end, a lot of queries get pushed into the fallback pool instead of finding a real match. See **Limitations** for why fixing that threshold is a priority.
 
 ### Engagement Prediction
 
