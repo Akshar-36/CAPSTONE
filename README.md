@@ -223,13 +223,4 @@ Finally, on the prediction side, the current test R² of approximately 0.19 refl
 - jsonschema — contract validation
 - pytest — testing
 
-## More Docs
 
-If you want to dig into our methodology, known technical debt, or implementation rules, check these out:
-- [IMPLEMENTATION_GUIDE.md](IMPLEMENTATION_GUIDE.md)
-- [DATA_ML_MASTER_TECHNICAL_AUDIT.md](DATA_ML_MASTER_TECHNICAL_AUDIT.md)
-- [RECOMMENDATION_QUALITY_AUDIT.md](RECOMMENDATION_QUALITY_AUDIT.md)
-- [HANDOFF.md](HANDOFF.md)
-- [CONTEXT.md](CONTEXT.md)
-- [contract/input_schema.json](contract/input_schema.json)
-- [contract/output_schema.json](contract/output_schema.json)
