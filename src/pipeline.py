@@ -33,6 +33,14 @@ class RecommenderPipeline:
         self.model = SentenceTransformer('all-MiniLM-L6-v2')
         
         self.trends_df = pd.read_parquet(os.path.join(PROJECT_ROOT, 'artifacts/v1.0/trends.parquet'))
+        w = self.config.get('weights_trend')
+        if w is not None and all(col in self.trends_df.columns for col in ['frequency', 'growth', 'engagement', 'recency']):
+            self.trends_df['trend_score'] = (
+                w[0] * self.trends_df['frequency'] +
+                w[1] * self.trends_df['growth'] +
+                w[2] * self.trends_df['engagement'] +
+                w[3] * self.trends_df['recency']
+            )
         
         with open(os.path.join(PROJECT_ROOT, 'artifacts/v1.0/category_centroids.pkl'), 'rb') as f:
             self.centroids = joblib.load(f)
@@ -73,14 +81,18 @@ class RecommenderPipeline:
             )
             
             # 1. Mapped Category
-            # We must use predict_category to also get category_match
-            best_cat, best_score, match_type = predict_category(brand_text, self.model, self.centroids, self.config['tau'])
+            best_cat, best_score, match_type = predict_category(
+                brand_text,
+                self.model,
+                self.centroids,
+                margin=self.config.get('relevance_margin', 0.010),
+                floor=self.config.get('relevance_floor', 0.250)
+            )
             
             # 2. Hashtags Candidates
-            # get_candidates_for_brand actually predicts category internally again, but it uses the exact same logic.
-            # We'll pass the text and it will map. 
+            # Pass resolved category directly to eliminate redundant embedding and conflicting prediction
             candidates, _ = get_candidates_for_brand(
-                brand_text, self.trends_df, self.h_emb_df, self.centroids, self.model, self.config
+                brand_text, self.trends_df, self.h_emb_df, self.centroids, self.model, self.config, resolved_category=best_cat
             )
             
             # 3. Hashtags History & Ranking
@@ -94,9 +106,15 @@ class RecommenderPipeline:
                 ranked_hashtags = pd.DataFrame()
 
             if not ranked_hashtags.empty:
-                top_n = ranked_hashtags.head(self.config['n_hashtags'])
-                
-                # Trending topics: top n_topics by trend_score
+                # Direction eligibility filtering: exclude falling hashtags before selecting recommendations
+                eligible_candidates = ranked_hashtags[ranked_hashtags['trend_direction'] != 'falling']
+                if not eligible_candidates.empty:
+                    active_candidates = eligible_candidates
+                else:
+                    # Safe fallback to all candidates if all are falling
+                    active_candidates = ranked_hashtags
+
+                top_n = active_candidates.head(self.config['n_hashtags'])
                 trending_df = top_n.sort_values('trend_score', ascending=False).head(self.config['n_topics'])
                 trending_topics = [h.replace('#', '') for h in trending_df['hashtag'].tolist()]
                 

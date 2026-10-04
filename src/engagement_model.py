@@ -6,7 +6,7 @@ import os
 import yaml
 from dotenv import find_dotenv
 
-PROJECT_ROOT = os.path.dirname(find_dotenv())
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 def load_config():
     with open(os.path.join(PROJECT_ROOT, 'config.yaml'), 'r') as f:

@@ -71,27 +71,30 @@ def compute_hashtag_embeddings(eligible_hashtags, hashtags_df, posts_df, model, 
         'embedding': list(embs)
     })
 
-def predict_category(brand_text, model, centroids, tau):
+def predict_category(brand_text, model, centroids, margin=0.010, floor=0.250, tau=None):
     """
-    Predict category for a brand text.
+    Predict category for a brand text using calibrated margin and floor gating.
     Returns (category, score, match_type).
     """
     b_emb = model.encode([brand_text])[0]
     
-    best_cat = None
-    best_score = -1.0
-    
+    sims = []
     for cat, c_emb in centroids.items():
-        if cat == 'other': continue
-        score = cosine_similarity([b_emb], [c_emb])[0][0]
-        if score > best_score:
-            best_score = score
-            best_cat = cat
-            
-    if best_score < tau:
-        return 'all', best_score, 'fallback_all'
+        if cat == 'other':
+            continue
+        score = float(cosine_similarity([b_emb], [c_emb])[0][0])
+        sims.append((cat, score))
+        
+    sims.sort(key=lambda x: x[1], reverse=True)
+    best_cat, top1_sim = sims[0]
+    second_cat, top2_sim = sims[1]
     
-    return best_cat, best_score, 'matched'
+    margin_val = top1_sim - top2_sim
+    
+    if margin_val >= margin and top1_sim >= floor:
+        return best_cat, top1_sim, 'matched'
+    
+    return 'all', top1_sim, 'fallback_all'
 
 def calculate_brand_relevance(brand_text, model, ht_embeddings_df):
     """

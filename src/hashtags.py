@@ -4,20 +4,26 @@ from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from trend import calculate_trend_signals
 
-def get_candidates_for_brand(brand_text, trends_df, h_emb_df, category_centroids, model, config):
-    brand_emb = model.encode([brand_text])[0]
+def get_candidates_for_brand(brand_text, trends_df, h_emb_df, category_centroids, model, config, resolved_category=None, brand_emb=None):
+    if brand_emb is None:
+        brand_emb = model.encode([brand_text])[0]
     
-    # Map to category
-    best_cat = None
-    best_sim = -1
-    for cat, cent in category_centroids.items():
-        sim = cosine_similarity([brand_emb], [cent])[0][0]
-        if sim > best_sim:
-            best_sim = sim
-            best_cat = cat
-            
-    if best_sim < config['tau']:
-        best_cat = 'all'
+    if resolved_category is not None:
+        best_cat = resolved_category
+    else:
+        # Map to category consistently with predict_category (skipping 'other')
+        best_cat = None
+        best_sim = -1
+        for cat, cent in category_centroids.items():
+            if cat == 'other':
+                continue
+            sim = cosine_similarity([brand_emb], [cent])[0][0]
+            if sim > best_sim:
+                best_sim = sim
+                best_cat = cat
+                
+        if best_sim < config['tau']:
+            best_cat = 'all'
         
     pool_trends = trends_df[trends_df['pool'] == best_cat]
     if pool_trends.empty:

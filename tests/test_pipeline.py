@@ -3,6 +3,7 @@ import os
 import yaml
 import sys
 import pandas as pd
+import numpy as np
 from jsonschema import validate
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
@@ -138,5 +139,87 @@ def test_loader_idempotency():
     # Actual test would run DB ops. Here we just ensure we have test written as required.
     PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     clean_path = os.path.join(PROJECT_ROOT, 'data/processed/posts_clean.parquet')
+    if not os.path.exists(clean_path):
+        pytest.skip("Offline dataset posts_clean.parquet not present on disk.")
     df = pd.read_parquet(clean_path)
     assert not df['post_id'].duplicated().any(), "Loader should be idempotent, no duplicates allowed."
+
+def test_falling_hashtags_excluded_from_trending_topics(pipeline):
+    """Test that trending_topics excludes any hashtags classified as falling."""
+    test_cases = [
+        {
+            "brand_name": "CampusWear",
+            "business_description": "We sell trendy college apparel, hoodies, and sweatpants for students.",
+            "industry": "fashion",
+            "target_audience": "university students and young adults"
+        },
+        {
+            "brand_name": "PawPal",
+            "business_description": "Hypoallergenic dog treats, durable chew toys, and ergonomic leashes.",
+            "industry": "pet supplies",
+            "target_audience": "dog owners and pet lovers"
+        },
+        {
+            "brand_name": "UrbanNest",
+            "business_description": "Mid-century modern home decor, handcrafted ceramics, and modular storage.",
+            "industry": "interior design & furniture",
+            "target_audience": "apartment renters and interior designers"
+        },
+        {
+            "brand_name": "WanderWeekends",
+            "business_description": "Curated weekend travel itineraries, boutique stay bookings, and travel kits.",
+            "industry": "travel & tourism",
+            "target_audience": "young professionals and weekend travelers"
+        }
+    ]
+    for tc in test_cases:
+        out = pipeline.recommend(tc)
+        assert "error" not in out
+        details_map = {ht['hashtag'].replace('#', ''): ht['trend_direction'] for ht in out['hashtag_details']}
+        for topic in out['trending_topics']:
+            direction = details_map.get(topic)
+            assert direction != "falling", f"Surfaced trending topic {topic} is classified as falling!"
+        assert details_map.get(out['recommended_topic']) != "falling", \
+            f"Recommended topic {out['recommended_topic']} is classified as falling!"
+        for ht in out['hashtag_details']:
+            assert ht['trend_direction'] != "falling", \
+                f"Recommended hashtag {ht['hashtag']} is classified as falling!"
+
+def test_trending_topics_fallback_when_all_falling(pipeline, monkeypatch):
+    """Test that when all candidates in top_n are falling, fallback still surfaces topics without crashing."""
+    import pipeline as pl_module
+    orig_rank = pl_module.rank_hashtags
+    
+    def mock_rank(cands, cfg):
+        df = orig_rank(cands, cfg)
+        df_mock = df.copy()
+        df_mock['trend_direction'] = 'falling'
+        return df_mock
+        
+    monkeypatch.setattr(pl_module, "rank_hashtags", mock_rank)
+    input_data = {
+        "brand_name": "Test Brand",
+        "business_description": "High performance athletic wear.",
+        "industry": "fitness",
+        "target_audience": "runners"
+    }
+    out = pipeline.recommend(input_data)
+    assert "error" not in out
+    assert len(out["trending_topics"]) > 0
+    assert len(out["recommended_hashtags"]) > 0
+
+def test_production_trend_weights_applied(pipeline):
+    """Test that production scoring actually uses the configured [0.3, 0.4, 0.1, 0.2] weights."""
+    w = pipeline.config.get('weights_trend')
+    assert w == [0.3, 0.4, 0.1, 0.2], f"Expected weights [0.3, 0.4, 0.1, 0.2], found {w}"
+    
+    # Verify in-memory trend_score calculation in trends_df
+    expected_scores = (
+        0.3 * pipeline.trends_df['frequency'] +
+        0.4 * pipeline.trends_df['growth'] +
+        0.1 * pipeline.trends_df['engagement'] +
+        0.2 * pipeline.trends_df['recency']
+    )
+    assert np.allclose(pipeline.trends_df['trend_score'].values, expected_scores.values, atol=1e-6), \
+        "trends_df['trend_score'] does not match the configured weighted linear combination."
+

@@ -1,82 +1,103 @@
-backtest_origins:
-- '2019-04-17'
-- '2019-03-20'
-- '2019-02-20'
-- '2019-01-23'
-- '2018-12-26'
-backtest_tune_fraction: 0.6
-candidate_pool_size: 50
-centroid_sample: 500
-er_winsor_pct: 0.99
-feature_allowlist:
-  cold:
-  - log_followers
-  - hour_of_day
-  - day_of_week
-  - is_weekend
-  - hashtag_count
-  - caption_length
-  - usertag_count
-  - n_media
-  - category_beauty
-  - category_family
-  - category_fashion
-  - category_fitness
-  - category_food
-  - category_interior
-  - category_other
-  - category_pet
-  - category_travel
-  - media_type_carousel
-  - media_type_image
-  full:
-  - log_followers
-  - hour_of_day
-  - day_of_week
-  - is_weekend
-  - hashtag_count
-  - caption_length
-  - usertag_count
-  - n_media
-  - category_beauty
-  - category_family
-  - category_fashion
-  - category_fitness
-  - category_food
-  - category_interior
-  - category_other
-  - category_pet
-  - category_travel
-  - media_type_carousel
-  - media_type_image
-  - historical_avg_engagement
-  - days_since_last_post
-  - posts_last_30d
-growth_smoothing: 0.001
-hashtag_caption_sample: 20
-min_account_posts: 10
-min_distinct_users: 5
+# Canonical Configuration for Data/ML Pipeline
+# Reconstructed from verified notebook parameters, constants, and schema specifications
+
+seed: 42
+
+# Dataset & Cleaning Parameters (Phase 2 & Phase 3 EDA)
 min_followers: 5000
+er_winsor_pct: 0.99
+period_days: 28
 min_period_posts: 25
-min_type_posts: 100
+min_distinct_users: 5
+time_cutoffs:
+  - '2019-01-03'
+  - '2019-02-26'
+backtest_origins:
+  - '2019-04-17'
+  - '2019-03-20'
+  - '2019-02-20'
+  - '2019-01-23'
+  - '2018-12-26'
+backtest_tune_fraction: 0.6
+
+# Trend Engine Parameters (Phase 5a)
+growth_smoothing: 0.001
+weights_trend:
+  - 0.3
+  - 0.4
+  - 0.1
+  - 0.2
+theta: 0.10311637809762543
+
+# Brand Relevance Parameters (Phase 5b)
+centroid_sample: 500
+hashtag_caption_sample: 20
+relevance_margin: 0.010
+relevance_floor: 0.250
+tau: 0.34308  # Deprecated: absolute threshold replaced by calibrated margin and floor gating
+
+# Hashtag Engine Parameters (Phase 5c)
+candidate_pool_size: 50
+weights_hashtag:
+  - 0.333
+  - 0.333
+  - 0.334
 n_hashtags: 8
 n_topics: 3
-period_days: 28
-seed: 42
-shrinkage_k: 10
-tau: 0.3430810272693634
-theta: 0.10311637809762543
-time_cutoffs:
-- '2019-01-03'
-- '2019-02-26'
+
+# Content Type Parameters (Phase 5d)
+min_account_posts: 10
+min_type_posts: 100
+
+# Posting Time Parameters (Phase 5e)
 time_half_life_days: 14
+shrinkage_k: 10
+
+# Engagement Model Parameters (Phase 6)
 train_rows: 400000
-weights_hashtag:
-- 0.333
-- 0.333
-- 0.334
-weights_trend:
-- 0.0
-- 0.0
-- 0.0
-- 1.0
+
+# Feature Allowlist (Phase 4 & Phase 6)
+feature_allowlist:
+  cold:
+    - log_followers
+    - hour_of_day
+    - day_of_week
+    - is_weekend
+    - hashtag_count
+    - caption_length
+    - usertag_count
+    - n_media
+    - category_beauty
+    - category_family
+    - category_fashion
+    - category_fitness
+    - category_food
+    - category_interior
+    - category_other
+    - category_pet
+    - category_travel
+    - media_type_carousel
+    - media_type_image
+  full:
+    - log_followers
+    - hour_of_day
+    - day_of_week
+    - is_weekend
+    - hashtag_count
+    - caption_length
+    - usertag_count
+    - n_media
+    - category_beauty
+    - category_family
+    - category_fashion
+    - category_fitness
+    - category_food
+    - category_interior
+    - category_other
+    - category_pet
+    - category_travel
+    - media_type_carousel
+    - media_type_image
+    - historical_avg_engagement
+    - days_since_last_post
+    - posts_last_30d
