@@ -223,3 +223,25 @@ def test_production_trend_weights_applied(pipeline):
     assert np.allclose(pipeline.trends_df['trend_score'].values, expected_scores.values, atol=1e-6), \
         "trends_df['trend_score'] does not match the configured weighted linear combination."
 
+def test_engagement_fallback_medians(pipeline):
+    """Verify that engagement fallback medians are positive, category-specific, and yield finite predictions."""
+    fallbacks = pipeline.engagement_model.fallbacks
+    assert "all" in fallbacks
+    assert fallbacks["all"]["follower_count"] == 27901
+    
+    # 1. No zero follower fallback remains across any category
+    for cat, vals in fallbacks.items():
+        assert vals["follower_count"] > 0, f"Zero follower count found in fallback category: {cat}"
+        
+    # 2. Category-specific fallback is used when available
+    em = pipeline.engagement_model
+    pred_fashion = em.predict(category="fashion", media_type="image", hour_of_day=12, day_of_week=0, hashtag_count=5)
+    assert 0.01 <= pred_fashion["value"] <= 0.15
+    assert pred_fashion["label"] in ["Low", "Medium", "High"]
+    
+    # 3. 'all' is used for an unknown/unmapped category
+    pred_unk = em.predict(category="unmapped_industry", media_type="image", hour_of_day=12, day_of_week=0, hashtag_count=5)
+    assert 0.01 <= pred_unk["value"] <= 0.15
+    assert pred_unk["label"] in ["Low", "Medium", "High"]
+
+

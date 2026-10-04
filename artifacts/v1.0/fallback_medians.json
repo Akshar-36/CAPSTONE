@@ -1,0 +1,62 @@
+{
+  "all": {
+    "follower_count": 27901,
+    "caption_length": 210,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "beauty": {
+    "follower_count": 32387,
+    "caption_length": 205,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "family": {
+    "follower_count": 21493,
+    "caption_length": 210,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "fashion": {
+    "follower_count": 32206,
+    "caption_length": 205,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "fitness": {
+    "follower_count": 38091,
+    "caption_length": 210,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "food": {
+    "follower_count": 21084,
+    "caption_length": 370,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "interior": {
+    "follower_count": 27119,
+    "caption_length": 380,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "other": {
+    "follower_count": 28586,
+    "caption_length": 205,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  },
+  "pet": {
+    "follower_count": 28469,
+    "caption_length": 230,
+    "usertag_count": 0,
+    "n_media_carousel": 1
+  },
+  "travel": {
+    "follower_count": 24396,
+    "caption_length": 210,
+    "usertag_count": 1,
+    "n_media_carousel": 1
+  }
+}
