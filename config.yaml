@@ -23,8 +23,8 @@ backtest_tune_fraction: 0.6
 # Trend Engine Parameters (Phase 5a)
 growth_smoothing: 0.001
 weights_trend:
-  - 0.3
-  - 0.4
+  - 0.6
+  - 0.1
   - 0.1
   - 0.2
 theta: 0.10311637809762543

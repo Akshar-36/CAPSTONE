@@ -209,14 +209,14 @@ def test_trending_topics_fallback_when_all_falling(pipeline, monkeypatch):
     assert len(out["recommended_hashtags"]) > 0
 
 def test_production_trend_weights_applied(pipeline):
-    """Test that production scoring actually uses the configured [0.3, 0.4, 0.1, 0.2] weights."""
+    """Test that production scoring actually uses the configured [0.6, 0.1, 0.1, 0.2] weights."""
     w = pipeline.config.get('weights_trend')
-    assert w == [0.3, 0.4, 0.1, 0.2], f"Expected weights [0.3, 0.4, 0.1, 0.2], found {w}"
+    assert w == [0.6, 0.1, 0.1, 0.2], f"Expected weights [0.6, 0.1, 0.1, 0.2], found {w}"
     
     # Verify in-memory trend_score calculation in trends_df
     expected_scores = (
-        0.3 * pipeline.trends_df['frequency'] +
-        0.4 * pipeline.trends_df['growth'] +
+        0.6 * pipeline.trends_df['frequency'] +
+        0.1 * pipeline.trends_df['growth'] +
         0.1 * pipeline.trends_df['engagement'] +
         0.2 * pipeline.trends_df['recency']
     )
